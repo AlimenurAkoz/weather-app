@@ -1,0 +1,25 @@
+# Python sanal ortamları
+venv/
+.venv/
+env/
+
+# Python önbelleği
+__pycache__/
+*.py[cod]
+
+# Ortam değişkenleri
+.env
+.env.*
+!.env.example
+
+# Node.js ve frontend çıktıları
+node_modules/
+.next/
+dist/
+build/
+
+# Editör ve sistem dosyaları
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
