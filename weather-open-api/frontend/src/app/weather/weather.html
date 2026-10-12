@@ -1,44 +1,433 @@
 <main class="page">
-  <h1>Hava durumu</h1>
 
-  <div class="search">
-    <input
-      #cityInput
-      type="text"
-      placeholder="Şehir adı yaz"
-      aria-label="Şehir adı"
-      (keyup.enter)="search(cityInput.value)"
-    />
-    <button type="button" (click)="search(cityInput.value)">Ara</button>
+  <header class="header">
+    <div>
+      <p class="eyebrow">OPEN-METEO</p>
+
+      <h1>Hava durumu</h1>
+
+      <p class="subtitle">
+        Şehrini ara ve güncel, saatlik ve 7 günlük
+        tahmini görüntüle.
+      </p>
+    </div>
+  </header>
+
+
+  <div class="search-area">
+
+    <div class="search">
+
+      <div class="input-wrapper">
+
+        <input
+          #cityInput
+          type="text"
+          placeholder="Şehir adı yaz"
+          aria-label="Şehir adı"
+          autocomplete="off"
+          (input)="onInput(cityInput.value)"
+          (keyup.enter)="search(cityInput.value)"
+        />
+
+        @if (showSuggestions()) {
+
+          <div class="suggestions">
+
+            @for (
+              suggestion of suggestions();
+              track suggestion.name + suggestion.country
+            ) {
+
+              <button
+                type="button"
+                class="suggestion"
+                (click)="selectSuggestion(suggestion)"
+              >
+
+                <span class="suggestion-city">
+                  {{ suggestion.name }}
+                </span>
+
+                <span class="suggestion-location">
+
+                  @if (suggestion.admin1) {
+                    {{ suggestion.admin1 }},
+                  }
+
+                  {{ suggestion.country }}
+
+                </span>
+
+              </button>
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <button
+        type="button"
+        (click)="search(cityInput.value)"
+      >
+        Ara
+      </button>
+
+    </div>
+
   </div>
 
+
   @if (error()) {
-    <p class="error" role="alert">{{ error() }}</p>
+
+    <p class="error" role="alert">
+      {{ error() }}
+    </p>
+
+
+    @if (suggestions().length > 0) {
+
+      <div class="did-you-mean">
+
+        <strong>
+          Bunu mu demek istediniz?
+        </strong>
+
+        <div class="suggestion-list">
+
+          @for (
+            suggestion of suggestions();
+            track suggestion.name + suggestion.country
+          ) {
+
+            <button
+              type="button"
+              (click)="selectSuggestion(suggestion)"
+            >
+              {{ suggestion.name }},
+              {{ suggestion.country }}
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+    }
+
   }
+
+
+  @if (loading()) {
+
+    <div class="loading">
+      Hava durumu yükleniyor...
+    </div>
+
+  }
+
 
   @if (weather(); as w) {
-    <section class="report">
-      <h2 class="city">{{ w.city }}</h2>
-      <p class="description">{{ w.description }}</p>
-      <p class="temp">{{ w.temperature }}<small>°C</small></p>
 
-      <div class="humidity">
-        <p class="humidity-text">Nem <strong>%{{ w.humidity }}</strong></p>
-        <div
-          class="meter"
-          role="meter"
-          aria-label="Nem oranı"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          [attr.aria-valuenow]="w.humidity"
-        >
-          <div class="meter-fill" [style.width.%]="w.humidity"></div>
+    <section class="report">
+
+
+      <!-- GÜNCEL HAVA DURUMU -->
+
+      <div class="current-card">
+
+        <div class="current-top">
+
+          <div>
+
+            <p class="label">
+              ŞU ANDA
+            </p>
+
+            <h2 class="city">
+              {{ w.city }}
+            </h2>
+
+            <p class="country">
+              {{ w.country }}
+            </p>
+
+          </div>
+
+
+          <div class="current-temperature">
+            {{ w.temperature }}<small>°C</small>
+          </div>
+
         </div>
+
+
+        <p class="description">
+          {{ w.description }}
+        </p>
+
+
+        <div class="current-details">
+
+          <div class="detail">
+
+            <span>
+              Nem
+            </span>
+
+            <strong>
+              %{{ w.humidity }}
+            </strong>
+
+          </div>
+
+
+          <div class="detail">
+
+            <span>
+              Durum
+            </span>
+
+            <strong>
+              {{ w.description }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="humidity">
+
+          <p class="humidity-text">
+
+            <span>
+              Nem
+            </span>
+
+            <strong>
+              %{{ w.humidity }}
+            </strong>
+
+          </p>
+
+
+          <div
+            class="meter"
+            role="meter"
+            aria-label="Nem oranı"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [attr.aria-valuenow]="w.humidity"
+          >
+
+            <div
+              class="meter-fill"
+              [style.width.%]="w.humidity"
+            ></div>
+
+          </div>
+
+        </div>
+
       </div>
+
+
+      <!-- 7 GÜNLÜK -->
+
+      <section class="forecast-section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <p class="label">
+              7 GÜN
+            </p>
+
+            <h2>
+              Haftalık tahmin
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <div class="daily-list">
+
+          @for (
+            day of w.daily;
+            track day.date;
+            let i = $index
+          ) {
+
+            <button
+              type="button"
+              class="day-card"
+              [class.selected]="selectedDay() === i"
+              (click)="selectDay(i)"
+            >
+
+              <div class="day-name">
+                {{ formatDay(day.date) }}
+              </div>
+
+
+              <div class="day-description">
+                {{ getWeatherDescription(day.weatherCode) }}
+              </div>
+
+
+              <div class="day-temperature">
+
+                <strong>
+                  {{ day.temperatureMax }}°
+                </strong>
+
+                <span>
+                  {{ day.temperatureMin }}°
+                </span>
+
+              </div>
+
+
+              <div class="rain">
+
+                <span>
+                  Yağış
+                </span>
+
+                <strong>
+                  %{{ day.precipitationProbability }}
+                </strong>
+
+              </div>
+
+
+              <div class="precipitation">
+                {{ day.precipitation }} mm
+              </div>
+
+
+              <div class="sun">
+
+                <span>
+                  ☀ {{ formatShortHour(day.sunrise) }}
+                </span>
+
+                <span>
+                  ☾ {{ formatShortHour(day.sunset) }}
+                </span>
+
+              </div>
+
+            </button>
+
+          }
+
+        </div>
+
+      </section>
+
+
+      <!-- SEÇİLEN GÜNÜN SAATLİĞİ -->
+
+      <section class="forecast-section">
+
+        <div class="section-heading">
+
+          <div>
+
+            <p class="label">
+              {{ formatDay(w.daily[selectedDay()].date) }}
+            </p>
+
+            <h2>
+              Saatlik tahmin
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <div class="hourly-list">
+
+          @for (
+            hour of getSelectedDayHours(w);
+            track hour.time
+          ) {
+
+            <article class="hour-card">
+
+              <strong class="hour">
+                {{ formatHour(hour.time) }}
+              </strong>
+
+
+              <span class="hour-description">
+                {{ getWeatherDescription(hour.weatherCode) }}
+              </span>
+
+
+              <strong class="hour-temperature">
+                {{ hour.temperature }}°C
+              </strong>
+
+
+              <span>
+                Hissedilen
+                {{ hour.apparentTemperature }}°C
+              </span>
+
+
+              <span>
+                Yağış
+                %{{ hour.precipitationProbability }}
+              </span>
+
+
+              <span>
+                Rüzgâr
+                {{ hour.windSpeed }} km/s
+              </span>
+
+
+              <span>
+                {{ hour.precipitation }} mm
+              </span>
+
+            </article>
+
+          }
+
+        </div>
+
+      </section>
+
     </section>
+
   }
-    <p class="source">
+
+
+  <p class="source">
+
     Veri kaynağı:
-    <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
+
+    <a
+      href="https://open-meteo.com/"
+      target="_blank"
+      rel="noopener"
+    >
+      Open-Meteo
+    </a>
+
   </p>
+
 </main>

@@ -1,114 +1,499 @@
 .page {
-  max-width: 32rem;
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 3rem 1.25rem 4rem;
+  padding: 48px 0 60px;
+}
+
+.header {
+  margin-bottom: 28px;
+}
+
+.eyebrow,
+.label {
+  margin: 0 0 6px;
+  color: var(--water);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
 }
 
 h1 {
-  margin: 0 0 1.5rem;
-  font-size: 1.125rem;
-  font-weight: 600;
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.subtitle {
+  max-width: 650px;
+  margin: 12px 0 0;
+  color: #63717e;
+}
+
+
+/* ARAMA */
+
+.search-area {
+  position: relative;
+  z-index: 10;
 }
 
 .search {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2.5rem;
+  gap: 10px;
+}
+
+.input-wrapper {
+  position: relative;
+  flex: 1;
 }
 
 .search input {
-  flex: 1;
-  min-width: 0;
-  padding: 0.75rem 1rem;
-  font: inherit;
-  color: inherit;
-  background: #fff;
+  width: 100%;
+  height: 52px;
+  padding: 0 18px;
   border: 1px solid var(--cloud);
-  border-radius: 0.5rem;
+  border-radius: 14px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  outline: none;
+}
+
+.search input:focus {
+  border-color: var(--water);
+  box-shadow:
+    0 0 0 4px rgba(31, 111, 168, 0.1);
 }
 
 .search button {
-  padding: 0.75rem 1.25rem;
-  font: inherit;
-  font-weight: 600;
-  color: #fff;
-  background: var(--ink);
+  height: 52px;
+  padding: 0 25px;
   border: 0;
-  border-radius: 0.5rem;
+  border-radius: 14px;
+  background: var(--water);
+  color: white;
+  font: inherit;
+  font-weight: 700;
   cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
 }
 
 .search button:hover {
-  background: #2a3a4b;
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
-.search input:focus-visible,
-.search button:focus-visible {
-  outline: 3px solid var(--water);
-  outline-offset: 2px;
+
+/* ÖNERİLER */
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  border: 1px solid var(--cloud);
+  border-radius: 14px;
+  background: white;
+  box-shadow:
+    0 18px 40px rgba(22, 32, 43, 0.12);
 }
+
+.suggestion {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 13px 16px;
+  border: 0;
+  border-bottom: 1px solid var(--fog);
+  background: white;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.suggestion:last-child {
+  border-bottom: 0;
+}
+
+.suggestion:hover {
+  background: var(--fog);
+}
+
+.suggestion-city {
+  font-weight: 700;
+}
+
+.suggestion-location {
+  color: #687783;
+  font-size: 0.85rem;
+}
+
+
+/* HATA */
 
 .error {
-  margin: 0 0 2rem;
-  padding: 0.75rem 1rem;
-  background: #fff;
-  border-left: 4px solid var(--alert);
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #fff0ef;
   color: var(--alert);
 }
 
-.report {/*hava durumu sonucu kismi*/
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--cloud);
+.did-you-mean {
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid var(--cloud);
+  border-radius: 14px;
+  background: white;
+}
+
+.did-you-mean strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.suggestion-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggestion-list button {
+  padding: 8px 12px;
+  border: 1px solid var(--cloud);
+  border-radius: 999px;
+  background: var(--fog);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.suggestion-list button:hover {
+  border-color: var(--water);
+}
+
+
+/* YÜKLENİYOR */
+
+.loading {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 16px;
+  background: white;
+  text-align: center;
+  color: #63717e;
+}
+
+
+/* GÜNCEL HAVA */
+
+.report {
+  margin-top: 28px;
+}
+
+.current-card {
+  padding: 30px;
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #eaf4fa
+    );
+  box-shadow:
+    0 18px 45px rgba(22, 32, 43, 0.08);
+}
+
+.current-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .city {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+}
+
+.country {
+  margin: 3px 0 0;
+  color: #63717e;
+}
+
+.description {
+  margin: 12px 0 0;
+  color: #52616d;
+  font-size: 1.1rem;
+}
+
+.current-temperature {
+  font-size: clamp(3.5rem, 9vw, 6rem);
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+.current-temperature small {
+  font-size: 0.4em;
   font-weight: 600;
 }
 
-.description {/*hava durumu aciklama kismi*/
-  margin: 0.25rem 0 0;
-  font-size: 1.125rem;
+.current-details {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
 }
 
-.temp {
-  margin: 1rem 0 1.75rem;
-  font-size: clamp(5rem, 22vw, 8rem);
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
+.detail {
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.7);
 }
 
-.temp small {/*santigrat simgesinin ayari*/
-  margin-left: 0.1em;
-  font-size: 0.4em;
-  font-weight: 400;
-  letter-spacing: 0;
+.detail span,
+.detail strong {
+  display: block;
 }
 
-.humidity-text {/*nem yazisinin alt boslugu*/
-  margin: 0 0 0.5rem;
+.detail span {
+  color: #63717e;
+  font-size: 0.85rem;
 }
 
-.meter {/*nem orani barinin arka plani*/
-  height: 0.5rem;
+.detail strong {
+  margin-top: 3px;
+}
+
+
+/* NEM */
+
+.humidity {
+  margin-top: 22px;
+}
+
+.humidity-text {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 7px;
+}
+
+.meter {
+  height: 9px;
   overflow: hidden;
-  background: var(--cloud);
   border-radius: 999px;
+  background: var(--cloud);
 }
 
-.meter-fill {/*nem orani barinin ic renkli kismi*/
+.meter-fill {
   height: 100%;
+  border-radius: inherit;
   background: var(--water);
 }
 
-.source {/*sayfanin altindaki veri kaynagi yazisi*/
-  margin-top: 3rem;
-  font-size: 0.875rem;
+
+/* BÖLÜMLER */
+
+.forecast-section {
+  margin-top: 38px;
 }
 
-.source a {/*veri kaynagi baglanti metni*/
+.section-heading h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+
+/* 7 GÜN */
+
+.daily-list {
+  display: grid;
+  grid-template-columns:
+    repeat(7, minmax(135px, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+  overflow-x: auto;
+}
+
+.day-card {
+  width: 100%;
+  min-width: 135px;
+  padding: 17px;
+  border: 1px solid var(--cloud);
+  border-radius: 17px;
+  background: white;
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.day-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--water);
+}
+
+.day-card.selected {
+  border-color: var(--water);
+  box-shadow:
+    0 0 0 3px rgba(31, 111, 168, 0.12);
+}
+
+.day-name {
+  min-height: 42px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.day-description {
+  min-height: 42px;
+  margin-top: 8px;
+  color: #63717e;
+  font-size: 0.84rem;
+}
+
+.day-temperature {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 15px;
+}
+
+.day-temperature strong {
+  font-size: 1.5rem;
+}
+
+.day-temperature span {
+  color: #71808c;
+}
+
+.rain {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--fog);
+  font-size: 0.84rem;
+}
+
+.precipitation {
+  margin-top: 7px;
+  color: #63717e;
+  font-size: 0.8rem;
+}
+
+.sun {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 14px;
+  color: #63717e;
+  font-size: 0.76rem;
+}
+
+
+/* SAATLİK */
+
+.hourly-list {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  padding-bottom: 8px;
+  overflow-x: auto;
+}
+
+.hour-card {
+  min-width: 145px;
+  padding: 17px;
+  border: 1px solid var(--cloud);
+  border-radius: 17px;
+  background: white;
+}
+
+.hour {
+  display: block;
+  font-size: 0.9rem;
+}
+
+.hour-description {
+  display: block;
+  min-height: 40px;
+  margin-top: 8px;
+  color: #63717e;
+  font-size: 0.8rem;
+}
+
+.hour-temperature {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.35rem;
+}
+
+.hour-card > span:not(.hour-description) {
+  display: block;
+  margin-top: 7px;
+  color: #687783;
+  font-size: 0.76rem;
+}
+
+
+/* KAYNAK */
+
+.source {
+  margin-top: 35px;
+  color: #687783;
+  font-size: 0.82rem;
+}
+
+.source a {
   color: var(--water);
+}
+
+
+/* MOBİL */
+
+@media (max-width: 700px) {
+
+  .page {
+    width: min(100% - 22px, 1180px);
+    padding-top: 30px;
+  }
+
+  .search {
+    flex-direction: column;
+  }
+
+  .search button {
+    width: 100%;
+  }
+
+  .current-card {
+    padding: 22px;
+  }
+
+  .current-top {
+    flex-direction: column;
+  }
+
+  .current-temperature {
+    font-size: 4rem;
+  }
+
+  .current-details {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-list {
+    grid-template-columns:
+      repeat(7, 145px);
+  }
 }
