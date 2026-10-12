@@ -1,0 +1,22 @@
+:root {
+  --ink: #16202b;
+  --fog: #eef2f5;
+  --cloud: #d3dce4;
+  --water: #1f6fa8;
+  --alert: #b3261e;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--fog);
+  color: var(--ink);
+  font-family: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  line-height: 1.5;
+}
