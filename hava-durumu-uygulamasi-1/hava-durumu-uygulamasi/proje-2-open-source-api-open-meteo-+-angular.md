@@ -1,6 +1,6 @@
 # Proje 2: Open Source API (Open-Meteo + Angular)
 
-&#x20;   Bu projede Python backend'i yazmak yerine, dışarıdaki hazır ve ücretsiz bir açık kaynak servis olan Open-Meteo API'si doğrudan Angular arayüzünden kullanıldı.
+&#x20;   Bu projede Python backend'i yazmak yerine, dışarıdaki hazır ve ücretsiz bir açık kaynak servis olan Open-Meteo API'si doğrudan Angular arayüzünde kullanıldı.
 
 
 
@@ -27,7 +27,7 @@ _**Sistem Akışı:**_
 
 ### _3._ Arayüz ve Bileşen Yönetimi _(weather.ts ve weather.html)_
 
-* **Otomatik Başlangıç:** Sayfanın ilk yüklenişinde boş bir ekran oluşmasını engellemek adına, yapıcı metot (constructor) içerisinde örnek veri olarak "Isparta" şehri için otomatik arama ayarlandı.
+* **Otomatik Başlangıç:** Sayfanın ilk yüklenişinde boş bir ekran oluşmasını engellemek adına, yapıcı metot (constructor) içerisinde örnek veri olarak "Sivas" şehri için otomatik arama ayarlandı.
 * **Signals Kullanımı:** Arayüzdeki verilerin takibi için Angular'ın _signal_ yapısı tercih edilmiştir. API'den gelen güncel veriler _.set()_ metodu ile aktarılarak arayüzün anlık güncellenmesi sağlandı.
 * **Görsel Nem Göstergesi:** Nem oranı verisi yüzde (%) değerine dönüştürülmüş ve _CSS \[style.width.%]_ özniteliği üzerinden dinamik bir grafik çubuğa bağlandı.
 
