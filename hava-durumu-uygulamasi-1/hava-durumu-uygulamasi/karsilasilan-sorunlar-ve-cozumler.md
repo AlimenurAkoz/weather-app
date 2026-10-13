@@ -3,7 +3,7 @@
 ### **1. Pylance Hatası (**_Import "fastapi" could not be resolved_**)**
 
 * _**Sebep:**_ VS Code'un, sanal ortama (_.venv_) ait olan Python yorumlayıcısını otomatik olarak seçememesi.
-* _**Çözüm:**_ Ayarlardan "_Python: Select Interpreter"_ ayarı seçildi ve .venv içerisindeki "_python.exe_"yolu elle seçilerek düzeltildi.
+* _**Çözüm:**_ Ayarlardan "_Python: Select Interpreter"_ ayarı seçildi ve .venv içerisindeki "_python.exe_" yolu elle seçilerek düzeltildi.
 
 ### **2. Angular CLI Çalışmama Hatası (**_not available when running..._**)**
 
@@ -13,7 +13,7 @@
 ### **3. Eksik esbuild Paketi Hatası (**_The package "@esbuild/win32-x64" could not be found_**)**
 
 * _**Sebep:**_ Paket indirmelerinin yarım kalması nedeniyle Windows için gerekli olan "_esbuild"_ dosyasının eksik inmesi.
-* _**Çözüm:**_ _node\_modules_ klasörü vedosyası tamamen silindi, ardından "_npm install"_ ile temiz ve eksiksiz bir kurulum yapıldı.
+* _**Çözüm:**_ _node\_modules_ klasörü ve dosyası tamamen silindi, ardından "_npm install"_ ile temiz ve eksiksiz bir kurulum yapıldı.
 
 ### **4. CORS (**_**Cross-Origin Resource Sharing**_**) Hatası**
 
