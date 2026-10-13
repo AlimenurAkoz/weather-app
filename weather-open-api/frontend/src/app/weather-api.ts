@@ -1,3 +1,4 @@
+//Open-meteo ile konuşur
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
@@ -9,7 +10,6 @@ export interface WeatherData {
   temperature: number;
   description: string;
   humidity: number;
-
   hourly: {
     time: string;
     temperature: number;
@@ -19,7 +19,6 @@ export interface WeatherData {
     windSpeed: number;
     weatherCode: number;
   }[];
-
   daily: {
     date: string;
     temperatureMax: number;
@@ -58,7 +57,6 @@ interface ForecastResponse {
     relative_humidity_2m: number;
     weather_code: number;
   };
-
   hourly: {
     time: string[];
     temperature_2m: number[];
@@ -68,7 +66,6 @@ interface ForecastResponse {
     wind_speed_10m: number[];
     weather_code: number[];
   };
-
   daily: {
     time: string[];
     temperature_2m_max: number[];
@@ -115,20 +112,15 @@ const WEATHER_CODES: Record<number, string> = {
 @Injectable({ providedIn: 'root' })
 export class WeatherApi {
   private http = inject(HttpClient);
-
   private geocodingUrl =
     'https://geocoding-api.open-meteo.com/v1/search';
-
   private forecastUrl =
     'https://api.open-meteo.com/v1/forecast';
-
   getSuggestions(city: string): Observable<CitySuggestion[]> {
     const value = city.trim();
-
     if (value.length < 2) {
       return of([]);
     }
-
     return this.http
       .get<GeocodingResponse>(this.geocodingUrl, {
         params: {
@@ -169,24 +161,18 @@ export class WeatherApi {
               () => new Error('Şehir bulunamadı'),
             );
           }
-
           return this.http
             .get<ForecastResponse>(this.forecastUrl, {
               params: {
                 latitude: place.latitude,
                 longitude: place.longitude,
-
                 current:
                   'temperature_2m,relative_humidity_2m,weather_code',
-
                 hourly:
                   'temperature_2m,apparent_temperature,precipitation_probability,precipitation,wind_speed_10m,weather_code',
-
                 daily:
                   'temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,weather_code,sunrise,sunset',
-
                 forecast_days: 7,
-
                 timezone: 'auto',
               },
             })
@@ -194,44 +180,33 @@ export class WeatherApi {
               map(
                 (forecast): WeatherData => ({
                   city: place.name,
-
                   country: place.country ?? '',
-
                   temperature: Math.round(
                     forecast.current.temperature_2m,
                   ),
-
                   description:
                     WEATHER_CODES[
-                      forecast.current.weather_code
+                    forecast.current.weather_code
                     ] ?? 'Bilinmiyor',
-
                   humidity:
                     forecast.current.relative_humidity_2m,
-
                   hourly: forecast.hourly.time.map(
                     (time, index) => ({
                       time,
-
                       temperature: Math.round(
                         forecast.hourly.temperature_2m[index],
                       ),
-
                       apparentTemperature: Math.round(
                         forecast.hourly.apparent_temperature[index],
                       ),
-
                       precipitationProbability:
                         forecast.hourly
                           .precipitation_probability[index],
-
                       precipitation:
                         forecast.hourly.precipitation[index],
-
                       windSpeed: Math.round(
                         forecast.hourly.wind_speed_10m[index],
                       ),
-
                       weatherCode:
                         forecast.hourly.weather_code[index],
                     }),
@@ -240,28 +215,22 @@ export class WeatherApi {
                   daily: forecast.daily.time.map(
                     (date, index) => ({
                       date,
-
                       temperatureMax: Math.round(
                         forecast.daily.temperature_2m_max[index],
                       ),
-
                       temperatureMin: Math.round(
                         forecast.daily.temperature_2m_min[index],
                       ),
-
                       precipitationProbability:
                         forecast.daily
                           .precipitation_probability_max[index],
-
                       precipitation:
                         forecast.daily.precipitation_sum[index],
-
                       weatherCode:
                         forecast.daily.weather_code[index],
 
                       sunrise:
                         forecast.daily.sunrise[index],
-
                       sunset:
                         forecast.daily.sunset[index],
                     }),

@@ -29,9 +29,6 @@ h1 {
   color: #63717e;
 }
 
-
-/* ARAMA */
-
 .search-area {
   position: relative;
   z-index: 10;
@@ -85,9 +82,6 @@ h1 {
   transform: translateY(-1px);
 }
 
-
-/* ÖNERİLER */
-
 .suggestions {
   position: absolute;
   top: calc(100% + 8px);
@@ -132,10 +126,7 @@ h1 {
   color: #687783;
   font-size: 0.85rem;
 }
-
-
-/* HATA */
-
+/*hata tasarimi*/
 .error {
   margin: 18px 0 0;
   padding: 14px 16px;
@@ -175,10 +166,7 @@ h1 {
 .suggestion-list button:hover {
   border-color: var(--water);
 }
-
-
-/* YÜKLENİYOR */
-
+/*yukleniyor*/
 .loading {
   margin-top: 24px;
   padding: 24px;
@@ -188,9 +176,7 @@ h1 {
   color: #63717e;
 }
 
-
-/* GÜNCEL HAVA */
-
+/*guncel hava*/
 .report {
   margin-top: 28px;
 }
@@ -270,9 +256,6 @@ h1 {
   margin-top: 3px;
 }
 
-
-/* NEM */
-
 .humidity {
   margin-top: 22px;
 }
@@ -296,9 +279,6 @@ h1 {
   background: var(--water);
 }
 
-
-/* BÖLÜMLER */
-
 .forecast-section {
   margin-top: 38px;
 }
@@ -308,9 +288,7 @@ h1 {
   font-size: 1.5rem;
 }
 
-
-/* 7 GÜN */
-
+/*7 gun gostergesi*/
 .daily-list {
   display: grid;
   grid-template-columns:
@@ -400,9 +378,7 @@ h1 {
   font-size: 0.76rem;
 }
 
-
-/* SAATLİK */
-
+/*saatlik gosterge*/
 .hourly-list {
   display: flex;
   gap: 10px;
@@ -445,9 +421,6 @@ h1 {
   font-size: 0.76rem;
 }
 
-
-/* KAYNAK */
-
 .source {
   margin-top: 35px;
   color: #687783;
@@ -457,10 +430,7 @@ h1 {
 .source a {
   color: var(--water);
 }
-
-
-/* MOBİL */
-
+ /*mobil*/
 @media (max-width: 700px) {
 
   .page {
