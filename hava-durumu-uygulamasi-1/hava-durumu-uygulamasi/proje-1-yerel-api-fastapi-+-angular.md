@@ -1,6 +1,6 @@
 # Proje 1: Yerel API (FastAPI + Angular)
 
-### Python Kullanarak Yazılan API ile Hava Durumu
+### Python Kullanarak Yazılan API ile Hava Durumu Uygulaması
 
 Bu projede, dışarıdan hazır bir servis kullanmak yerine Python / FastAPI backend'i yazılarak Angular arayüzü ile haberleştirildi.
 
