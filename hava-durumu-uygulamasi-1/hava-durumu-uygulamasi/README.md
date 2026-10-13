@@ -9,7 +9,7 @@ Github: [https://github.com/AlimenurAkoz/weather-app](https://github.com/Alimenu
 
 #### Amaç:&#x20;
 
-Hava durumu uygulamasında, backend Python ile FastAPI yazmak ve açık kaynak API kullanmak şeklinde iki farklı mimdeneyimlenmesi amacıyla iki ayrı proje yapılmıştır.
+Hava durumu uygulamasında, backend Python ile FastAPI yazmak ve açık kaynak API kullanmak şeklinde iki farklı mimarinin deneyimlenmesi amacıyla iki ayrı proje yapılmıştır.
 
 | Özellik      | Weather App (Yerel API)                        | Weather Open API App (Açık API)                     |
 | ------------ | ---------------------------------------------- | --------------------------------------------------- |
