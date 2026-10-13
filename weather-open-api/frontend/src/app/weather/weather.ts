@@ -40,7 +40,7 @@ export class Weather {
   private searchSubject = new Subject<string>();
 
   constructor() {
-    this.search('Isparta');
+    this.search('Sivas');
 
     this.searchSubject
       .pipe(
