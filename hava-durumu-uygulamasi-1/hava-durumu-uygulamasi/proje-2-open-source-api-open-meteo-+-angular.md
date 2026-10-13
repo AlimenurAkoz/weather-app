@@ -28,8 +28,8 @@ _**Sistem Akışı:**_
 ### _3._ Arayüz ve Bileşen Yönetimi _(weather.ts ve weather.html)_
 
 * **Otomatik Başlangıç:** Sayfanın ilk yüklenişinde boş bir ekran oluşmasını engellemek adına, yapıcı metot (constructor) içerisinde örnek veri olarak "Sivas" şehri için otomatik arama ayarlandı.
-* **Signals Kullanımı:** Arayüzdeki verilerin takibi için Angular'ın _signal_ yapısı tercih edilmiştir. API'den gelen güncel veriler _.set()_ metodu ile aktarılarak arayüzün anlık güncellenmesi sağlandı.
-* **Görsel Nem Göstergesi:** Nem oranı verisi yüzde (%) değerine dönüştürülmüş ve _CSS \[style.width.%]_ özniteliği üzerinden dinamik bir grafik çubuğa bağlandı.
+* **Signals Kullanımı:** Arayüzdeki verilerin takibi için Angular'ın _signal_ yapısı tercih edildi. API'den gelen güncel veriler _.set()_ metodu ile aktarılarak arayüzün anlık güncellenmesi sağlandı.
+* **Görsel Nem Göstergesi:** Nem oranı verisi yüzde (%) değerine dönüştürüldü ve CSS [style.width.%] özniteliği üzerinden dinamik bir grafik çubuğa bağlandı.
 
 <figure><img src=".gitbook/assets/start.png" alt=""><figcaption></figcaption></figure>
 
