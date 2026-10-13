@@ -13,7 +13,7 @@ export class Weather {
   error = signal('');
 
   constructor() {
-    this.search('Isparta');
+    this.search('Sivas');
   }
 
   search(city: string) {

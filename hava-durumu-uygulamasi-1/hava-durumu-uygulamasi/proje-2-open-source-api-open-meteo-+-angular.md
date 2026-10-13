@@ -31,8 +31,8 @@ _**Sistem Akışı:**_
 * **Signals Kullanımı:** Arayüzdeki verilerin takibi için Angular'ın _signal_ yapısı tercih edilmiştir. API'den gelen güncel veriler _.set()_ metodu ile aktarılarak arayüzün anlık güncellenmesi sağlandı.
 * **Görsel Nem Göstergesi:** Nem oranı verisi yüzde (%) değerine dönüştürülmüş ve _CSS \[style.width.%]_ özniteliği üzerinden dinamik bir grafik çubuğa bağlandı.
 
-<figure><img src=".gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/start.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src=".gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/detail.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src=".gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/search.png" alt=""><figcaption></figcaption></figure>
