@@ -1,15 +1,16 @@
+:host {
+  --muted: #63717e;
+}
+
 .page {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   padding: 48px 0 60px;
 }
 
-.header {
-  margin-bottom: 28px;
-}
+.header { margin-bottom: 28px; }
 
-.eyebrow,
-.label {
+.eyebrow, .label {
   margin: 0 0 6px;
   color: var(--water);
   font-size: 0.75rem;
@@ -26,23 +27,13 @@ h1 {
 .subtitle {
   max-width: 650px;
   margin: 12px 0 0;
-  color: #63717e;
+  color: var(--muted);
 }
 
-.search-area {
-  position: relative;
-  z-index: 10;
-}
-
-.search {
-  display: flex;
-  gap: 10px;
-}
-
-.input-wrapper {
-  position: relative;
-  flex: 1;
-}
+/* Arama */
+.search-area { position: relative; z-index: 10; }
+.search { display: flex; gap: 10px; }
+.input-wrapper { position: relative; flex: 1; }
 
 .search input {
   width: 100%;
@@ -58,11 +49,10 @@ h1 {
 
 .search input:focus {
   border-color: var(--water);
-  box-shadow:
-    0 0 0 4px rgba(31, 111, 168, 0.1);
+  box-shadow: 0 0 0 4px rgba(31, 111, 168, 0.1);
 }
 
-.search button {
+.search > button {
   height: 52px;
   padding: 0 25px;
   border: 0;
@@ -72,15 +62,10 @@ h1 {
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  transition:
-    transform 0.15s ease,
-    opacity 0.15s ease;
+  transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-.search button:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
+.search > button:hover { opacity: 0.9; transform: translateY(-1px); }
 
 .suggestions {
   position: absolute;
@@ -90,43 +75,31 @@ h1 {
   overflow: hidden;
   border: 1px solid var(--cloud);
   border-radius: 14px;
-  background: white;
-  box-shadow:
-    0 18px 40px rgba(22, 32, 43, 0.12);
+  background: rgb(11, 72, 115);
+  box-shadow: 0 18px 40px rgba(22, 32, 43, 0.12);
 }
 
-.suggestion {
+.search .suggestion {
   display: flex;
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
   padding: 13px 16px;
-  border: 0;
+  border-radius: 0;
   border-bottom: 1px solid var(--fog);
-  background: white;
+  background: rgb(101, 167, 196);
   color: var(--ink);
   text-align: left;
   cursor: pointer;
 }
 
-.suggestion:last-child {
-  border-bottom: 0;
-}
+.suggestion:last-child { border-bottom: 0; }
+.suggestion:hover { background: var(--fog); transform: translateX(4px); }
+.suggestion-city { font-weight: 700; }
+.suggestion-location { color: #060808; font-size: 0.85rem; }
 
-.suggestion:hover {
-  background: var(--fog);
-}
-
-.suggestion-city {
-  font-weight: 700;
-}
-
-.suggestion-location {
-  color: #687783;
-  font-size: 0.85rem;
-}
-/*hata tasarimi*/
+/* Hata ve "Bunu mu demek istediniz?" */
 .error {
   margin: 18px 0 0;
   padding: 14px 16px;
@@ -143,16 +116,8 @@ h1 {
   background: white;
 }
 
-.did-you-mean strong {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.suggestion-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+.did-you-mean strong { display: block; margin-bottom: 10px; }
+.suggestion-list { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .suggestion-list button {
   padding: 8px 12px;
@@ -163,35 +128,26 @@ h1 {
   cursor: pointer;
 }
 
-.suggestion-list button:hover {
-  border-color: var(--water);
-}
-/*yukleniyor*/
+.suggestion-list button:hover { border-color: var(--water); }
+
+/* Yükleniyor */
 .loading {
   margin-top: 24px;
   padding: 24px;
   border-radius: 16px;
   background: white;
   text-align: center;
-  color: #63717e;
+  color: var(--muted);
 }
 
-/*guncel hava*/
-.report {
-  margin-top: 28px;
-}
+/* Güncel hava */
+.report { margin-top: 28px; }
 
 .current-card {
   padding: 30px;
   border-radius: 24px;
-  background:
-    linear-gradient(
-      135deg,
-      #ffffff,
-      #eaf4fa
-    );
-  box-shadow:
-    0 18px 45px rgba(22, 32, 43, 0.08);
+  background: linear-gradient(135deg, #ffffff, #eaf4fa);
+  box-shadow: 0 18px 45px rgba(22, 32, 43, 0.08);
 }
 
 .current-top {
@@ -201,21 +157,9 @@ h1 {
   gap: 20px;
 }
 
-.city {
-  margin: 0;
-  font-size: clamp(1.7rem, 4vw, 2.5rem);
-}
-
-.country {
-  margin: 3px 0 0;
-  color: #63717e;
-}
-
-.description {
-  margin: 12px 0 0;
-  color: #52616d;
-  font-size: 1.1rem;
-}
+.city { margin: 0; font-size: clamp(1.7rem, 4vw, 2.5rem); }
+.country { margin: 3px 0 0; color: var(--muted); }
+.description { margin: 12px 0 0; color: var(--muted); font-size: 1.1rem; }
 
 .current-temperature {
   font-size: clamp(3.5rem, 9vw, 6rem);
@@ -223,15 +167,11 @@ h1 {
   line-height: 0.9;
 }
 
-.current-temperature small {
-  font-size: 0.4em;
-  font-weight: 600;
-}
+.current-temperature small { font-size: 0.4em; font-weight: 600; }
 
 .current-details {
   display: grid;
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-top: 28px;
 }
@@ -242,57 +182,31 @@ h1 {
   background: rgba(255, 255, 255, 0.7);
 }
 
-.detail span,
-.detail strong {
-  display: block;
+.detail span, .detail strong { display: block; }
+.detail span { color: var(--muted); font-size: 0.85rem; }
+.detail strong { margin-top: 3px; }
+
+/* Nem göstergesi */
+.humidity { margin-top: 22px; }
+.humidity-text { display: flex; justify-content: space-between; margin: 0 0 7px; }
+.meter { height: 9px; overflow: hidden; border-radius: 999px; background: var(--cloud); }
+.meter-fill { height: 100%; border-radius: inherit; background: var(--water); }
+
+.forecast-section { margin-top: 38px; }
+.section-heading h2 { margin: 0; font-size: 1.5rem; }
+
+/* Haftalık ve saatlik kartlar (ortak görünüm) */
+.day-card, .hour-card {
+  padding: 17px;
+  border: 1px solid var(--cloud);
+  border-radius: 17px;
+  background: white;
 }
 
-.detail span {
-  color: #63717e;
-  font-size: 0.85rem;
-}
-
-.detail strong {
-  margin-top: 3px;
-}
-
-.humidity {
-  margin-top: 22px;
-}
-
-.humidity-text {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 0 7px;
-}
-
-.meter {
-  height: 9px;
-  overflow: hidden;
-  border-radius: 999px;
-  background: var(--cloud);
-}
-
-.meter-fill {
-  height: 100%;
-  border-radius: inherit;
-  background: var(--water);
-}
-
-.forecast-section {
-  margin-top: 38px;
-}
-
-.section-heading h2 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-/*7 gun gostergesi*/
+/* Haftalık */
 .daily-list {
   display: grid;
-  grid-template-columns:
-    repeat(7, minmax(135px, 1fr));
+  grid-template-columns: repeat(7, minmax(135px, 1fr));
   gap: 10px;
   margin-top: 15px;
   overflow-x: auto;
@@ -301,58 +215,29 @@ h1 {
 .day-card {
   width: 100%;
   min-width: 135px;
-  padding: 17px;
-  border: 1px solid var(--cloud);
-  border-radius: 17px;
-  background: white;
   color: var(--ink);
   text-align: left;
   font: inherit;
   cursor: pointer;
-  transition:
-    transform 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.day-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--water);
-}
+.day-card:hover { transform: translateY(-2px); border-color: var(--water); }
+.day-card.selected { border-color: var(--water); box-shadow: 0 0 0 3px rgba(31, 111, 168, 0.12); }
 
-.day-card.selected {
-  border-color: var(--water);
-  box-shadow:
-    0 0 0 3px rgba(31, 111, 168, 0.12);
-}
+.day-name { min-height: 42px; font-weight: 700; text-transform: capitalize; }
 
-.day-name {
-  min-height: 42px;
-  font-weight: 700;
-  text-transform: capitalize;
-}
-
-.day-description {
+.day-description, .hour-description {
+  display: block;
   min-height: 42px;
   margin-top: 8px;
-  color: #63717e;
-  font-size: 0.84rem;
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
-.day-temperature {
-  display: flex;
-  align-items: baseline;
-  gap: 7px;
-  margin-top: 15px;
-}
-
-.day-temperature strong {
-  font-size: 1.5rem;
-}
-
-.day-temperature span {
-  color: #71808c;
-}
+.day-temperature { display: flex; align-items: baseline; gap: 7px; margin-top: 15px; }
+.day-temperature strong { font-size: 1.5rem; }
+.day-temperature span { color: var(--muted); }
 
 .rain {
   display: flex;
@@ -363,107 +248,41 @@ h1 {
   font-size: 0.84rem;
 }
 
-.precipitation {
-  margin-top: 7px;
-  color: #63717e;
-  font-size: 0.8rem;
-}
+.precipitation { margin-top: 7px; color: var(--muted); font-size: 0.8rem; }
 
 .sun {
   display: flex;
   justify-content: space-between;
   gap: 8px;
   margin-top: 14px;
-  color: #63717e;
+  color: var(--muted);
   font-size: 0.76rem;
 }
 
-/*saatlik gosterge*/
-.hourly-list {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-  padding-bottom: 8px;
-  overflow-x: auto;
-}
-
-.hour-card {
-  min-width: 145px;
-  padding: 17px;
-  border: 1px solid var(--cloud);
-  border-radius: 17px;
-  background: white;
-}
-
-.hour {
-  display: block;
-  font-size: 0.9rem;
-}
-
-.hour-description {
-  display: block;
-  min-height: 40px;
-  margin-top: 8px;
-  color: #63717e;
-  font-size: 0.8rem;
-}
-
-.hour-temperature {
-  display: block;
-  margin-top: 10px;
-  font-size: 1.35rem;
-}
+/* Saatlik */
+.hourly-list { display: flex; gap: 10px; margin-top: 15px; padding-bottom: 8px; overflow-x: auto; }
+.hour-card { min-width: 145px; }
+.hour { display: block; font-size: 0.9rem; }
+.hour-temperature { display: block; margin-top: 10px; font-size: 1.35rem; }
 
 .hour-card > span:not(.hour-description) {
   display: block;
   margin-top: 7px;
-  color: #687783;
+  color: var(--muted);
   font-size: 0.76rem;
 }
 
-.source {
-  margin-top: 35px;
-  color: #687783;
-  font-size: 0.82rem;
-}
+.source { margin-top: 35px; color: var(--muted); font-size: 0.82rem; }
+.source a { color: var(--water); }
 
-.source a {
-  color: var(--water);
-}
- /*mobil*/
+/* Mobil */
 @media (max-width: 700px) {
-
-  .page {
-    width: min(100% - 22px, 1180px);
-    padding-top: 30px;
-  }
-
-  .search {
-    flex-direction: column;
-  }
-
-  .search button {
-    width: 100%;
-  }
-
-  .current-card {
-    padding: 22px;
-  }
-
-  .current-top {
-    flex-direction: column;
-  }
-
-  .current-temperature {
-    font-size: 4rem;
-  }
-
-  .current-details {
-    grid-template-columns: 1fr;
-  }
-
-  .daily-list {
-    grid-template-columns:
-      repeat(7, 145px);
-  }
+  .page { width: min(100% - 22px, 1180px); padding-top: 30px; }
+  .search { flex-direction: column; }
+  .search button { width: 100%; }
+  .current-card { padding: 22px; }
+  .current-top { flex-direction: column; }
+  .current-temperature { font-size: 4rem; }
+  .current-details { grid-template-columns: 1fr; }
+  .daily-list { grid-template-columns: repeat(7, 145px); }
 }
