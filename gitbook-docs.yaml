@@ -68,16 +68,3 @@ site:
           default: true
           content:
             directory: ./help-center
-    - type: section
-      key: section-6
-      title: Hava Durumu Uygulaması
-      path: hava-durumu-uygulamasi-1
-      children:
-        - type: space
-          key: space-6
-          title: Hava Durumu Uygulaması
-          path: hava-durumu-uygulamasi
-          default: true
-          draft: true
-          content:
-            directory: ./hava-durumu-uygulamasi-1/hava-durumu-uygulamasi
