@@ -29,6 +29,7 @@ site:
           default: true
           content:
             directory: ./documentation
+            language: tr
     - type: section
       key: section-3
       title: API Reference
