@@ -27,8 +27,6 @@ https://geocoding-api.open-meteo.com/v1/search?name=Sivas&count=1&language=tr
 
 **Örnek cevap (kısaltılmış):**
 
-json
-
 ```json
 {
   "results": [
@@ -48,7 +46,7 @@ json
 Gerçek cevapta her sonuçta başka alanlar da bulunur. Uygulamada yalnızca yukarıdaki altı alan kullanılır.&#x20;
 {% endhint %}
 
-**Dikkat edilecek nokta:** Şehir bulunamazsa API hata döndürmez. Cevapta **`results`** alanı hiç bulunmaz. Bulunamama iki farklı şekilde ortaya çıkabilir:
+Şehir bulunamazsa API hata döndürmez. Cevapta **`results`** alanı hiç bulunmaz. Bulunamama iki farklı şekilde ortaya çıkabilir:
 
 1. #### **Hiç eşleşmeyen yazım:**
 
@@ -136,8 +134,6 @@ https://api.open-meteo.com/v1/forecast
 
 **Örnek cevap (kısaltılmış)**
 
-json
-
 ```json
 {
   "timezone": "Europe/Istanbul",
@@ -170,9 +166,9 @@ Alan sayısını kısaltmak için `hourly` ve `daily` içinde yalnızca birkaç 
 {% hint style="info" %}
 #### Cevabın yapısı hakkında:
 
-**1. Veriler “paralel dizilerdir”.** `hourly` ve `daily` içindeki her alan ayrı bir dizidir ve aynı sıradaki elemanlar birbirine aittir. Örneğin `time[3]`, `temperature_2m[3]` ve `weather_code[3]` aynı saate ait değerlerdir. Ekranda saat başına bir kart göstereceğimiz için bu diziler servis kodunda `index` ile birleştirilip nesne listesine çevrilir (Sayfa 5, `map` bölümü).
+**1. Veriler “paralel dizilerdir”.** `hourly` ve `daily` içindeki her alan ayrı bir dizidir ve aynı sıradaki elemanlar birbirine aittir. Örneğin `time[3]`, `temperature_2m[3]` ve `weather_code[3]` aynı saate ait değerlerdir. Ekranda saat başına bir kart göstereceğimiz için bu diziler servis kodunda `index` ile birleştirilip nesne listesine çevrilir.
 
-**2. Zaman bilgisi saat dilimi eki taşımaz.** `timezone=auto` sayesinde saatler `2026-10-14T00:00` biçiminde, sorgulanan şehrin yerel saatiyle gelir. Günlük listedeki tarih ise `2026-10-14` biçimindedir. Bu iki biçimin başlangıcı aynı olduğu için, seçilen günün saatlerini bulurken saatin metin olarak o tarihle başlayıp başlamadığına bakılır (Sayfa 6, `getSelectedDayHours`).
+**2. Zaman bilgisi saat dilimi eki taşımaz.** `timezone=auto` sayesinde saatler `2026-10-14T00:00` biçiminde, sorgulanan şehrin yerel saatiyle gelir. Günlük listedeki tarih ise `2026-10-14` biçimindedir. Bu iki biçimin başlangıcı aynı olduğu için, seçilen günün saatlerini bulurken saatin metin olarak o tarihle başlayıp başlamadığına bakılır .
 
-**3. Hava durumu kodu sayıdır.** `weather_code` değeri `0`, `2`, `61` gibi bir sayıdır. Türkçe karşılıklarına çevirmek için uygulamada bir sözlük tutulur (Sayfa 5, `WEATHER_CODES`).
+**3. Hava durumu kodu sayıdır.** `weather_code` değeri `0`, `2`, `61` gibi bir sayıdır. Türkçe karşılıklarına çevirmek için uygulamada bir sözlük tutulur.
 {% endhint %}
