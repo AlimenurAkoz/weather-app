@@ -1,6 +1,6 @@
 # Arayüz Şablonu(weather.html)
 
-`weather.html`, bileşendeki signal’leri ekrana çevirir. Şablonda iş mantığı yazılmaz, veri ve tarih biçimlendirmesi [bileşen](bilesen-mantigi.md#gun-secimi-ve-saatlik-liste)den gelir. Dosyanın tamamı için GitHub’daki [`src/app/weather/weather.html`](https://github.com/AlimenurAkoz/weather-app/blob/main/weather-open-api/frontend/src/app/weather/weather.html) dosyasına bakabilirsiniz.
+`weather.html`, bileşendeki signal’leri ekrana çevirir. Şablonda iş mantığı yazılmaz, veri ve tarih biçimlendirmesi [bileşen](bilesen-mantigi-weather.ts.md#gun-secimi-ve-saatlik-liste)den gelir. Dosyanın tamamı için GitHub’daki [`src/app/weather/weather.html`](https://github.com/AlimenurAkoz/weather-app/blob/main/weather-open-api/frontend/src/app/weather/weather.html) dosyasına bakabilirsiniz.
 
 ## Şablonun genel yapısı
 
@@ -104,7 +104,7 @@ Koşullu bölümler Angular’ın `@if` ve `@for` blokları ile yazılır. Bu bl
     2. Öneri listesinin dolu olması (`suggestions()`)
 
     Hata oluşmadığı sürece öneri listesi dolu olsa dahi kutu açılmaz.
-* Yazarken açılan liste ile bu kutu aynı `suggestions` signal’ini kullanır. Ayrım `showSuggestions` ile yapılır, `trySuggestion` bu signal’i `false` bırakır. Detay için [tıklayınız](bilesen-mantigi.md#bicimlendirme-metotlari).
+* Yazarken açılan liste ile bu kutu aynı `suggestions` signal’ini kullanır. Ayrım `showSuggestions` ile yapılır, `trySuggestion` bu signal’i `false` bırakır. Detay için [tıklayınız](bilesen-mantigi-weather.ts.md#bicimlendirme-metotlari).
 * `role="alert"`, ekran okuyucuların hata mesajını hemen okumasını sağlar.
 
 
