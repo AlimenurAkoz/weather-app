@@ -32,7 +32,7 @@ frontend/src/
 
 <table data-search="false"><thead><tr><th width="179">Dosya</th><th width="434.20001220703125">Görevi</th></tr></thead><tbody><tr><td><code>weather-api.ts</code></td><td>Open-Meteo’ya iki aşamalı istek atar (Geocoding → Forecast), veriyi sadeleştirir, hataları fırlatır. Uygulamanın dış dünyayla konuşan tek noktasıdır.</td></tr><tr><td><code>weather.ts</code></td><td>Kullanıcının yazdığı şehri servise iletir, gelen veriyi <code>signal</code>’lerde tutar. Arayüzün “beyni”dir.</td></tr><tr><td><code>weather.html</code></td><td><code>signal</code> değerlerini ekranda gösterir: arama kutusu, güncel hava, nem çubuğu, haftalık ve saatlik kartlar.</td></tr><tr><td><code>weather.css</code></td><td>Yalnızca <code>weather</code> component'ine ait stiller.</td></tr><tr><td><code>app.config.ts</code></td><td>Uygulama genelindeki ayarlar. <code>provideHttpClient()</code> burada eklenir.</td></tr><tr><td><code>app.ts</code> / <code>app.html</code></td><td>Uygulamanın kök component'i. <code>&#x3C;app-weather /></code> burada çağrılarak hava durumu ekrana yerleştirilir.</td></tr><tr><td><code>main.ts</code></td><td>Uygulamayı başlatır (<code>bootstrapApplication</code>). Değiştirilmez.</td></tr><tr><td><code>styles.css</code></td><td>Tüm uygulamayı kapsayan genel stiller.</td></tr><tr><td><code>*.spec.ts</code></td><td>Test dosyaları.</td></tr></tbody></table>
 
-### Veri hangi dosyadan hangisine akar?
+## Veri hangi dosyadan hangisine akar?
 
 ```
 weather.html  →  weather.ts  →  weather-api.ts  →  Open-Meteo
@@ -58,7 +58,7 @@ Daha detaylı veri akışına [Veri Akışı](./#veri-akisi) başlığından ula
 
 `app.routes.ts` (`routes` listesi boş kalır, routing kullanmıyoruz), `tsconfig.json`, `main.ts`, `app.css`, `package.json`. `app.css` kök component'in stili boş kalır.
 
-### Dosyaları oluşturma komutları
+## Dosyaları oluşturma komutları
 
 bash
 
