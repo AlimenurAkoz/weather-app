@@ -1,10 +1,10 @@
-# Bileşen Mantığı
+# Component(Bileşen) Mantığı(weather.ts)
 
 `weather.ts`  kullanıcının yazdığı şehri servise iletir, gelen veriyi signal’lerde tutar ve şablonun kullanacağı yardımcı metotları sağlar. Dosyanın tamamı için GitHub’daki [`src/app/weather/weather.ts`](https://github.com/AlimenurAkoz/weather-app/blob/main/weather-open-api/frontend/src/app/weather/weather.ts) dosyasına bakabilirsiniz.
 
 ### Servis ve Signal’ler
 
-* Bileşen servisi `inject` ile alır ve ekranın bağlı olduğu durumu signal’lerde tutar:
+* Component servisi `inject` ile alır ve ekranın bağlı olduğu durumu signal’lerde tutar:
 
 ```ts
 export class Weather {
@@ -38,7 +38,7 @@ constructor() {
 
 #### `search`: servisi çağırma
 
-Arama kutusunda basılan "Ara" düğmesi, Enter tuşu ve açılış aramasının hepsi bu metodu çağırır:
+"Ara" düğmesine basılması, kutuda Enter tuşu ve açılış araması bu metodu çağırır:
 
 ```ts
 search(city: string) {
@@ -127,7 +127,7 @@ formatShortHour(value: string): string {
 
 
 
-2. **Durum metni için bileşen servise yönlendirir:**
+2. **Durum metni için component servise yönlendirir:**
 
 ```ts
 getWeatherDescription(code: number): string {
@@ -135,9 +135,9 @@ getWeatherDescription(code: number): string {
 }
 ```
 
+#### Şehir Önerileri
 
-
-3. **Aynı `suggestions` signal’i iki farklı yerde kullanılır. Ayrımı `showSuggestions` yapar:**
+Aynı `suggestions` signal’i iki farklı yerde kullanılır. Ayrımı `showSuggestions` yapar:
 
 <table data-header-hidden><thead><tr><th width="531.7999572753906"></th><th></th></tr></thead><tbody><tr><td>Durum</td><td><code>showSuggestions</code></td></tr><tr><td>Şehir aramasında kullanıcı kutuya şehir yazarken</td><td><code>true</code></td></tr><tr><td>Arama sonuç vermeyince ("Bunu mu demek istediniz?")</td><td><code>false</code></td></tr></tbody></table>
 
@@ -177,6 +177,7 @@ this.searchSubject
   });
 ```
 
+* `debounceTime(300)`: kullanıcı yazmayı bıraktıktan 300 milisaniye (0,3 saniye) sonra istek atılır. Bu süre dolmadan yeni bir tuşa basılırsa bekleme sıfırlanır. Böylece her tuş vuruşu için ayrı bir API isteği gönderilmez.
 * `distinctUntilChanged()`: değer değişmediyse tekrar sorulmaz.
 * `switchMap`: yeni yazım gelince önceki istek iptal edilir, yalnızca en son yazımın cevabı kullanılır.
 

@@ -1,6 +1,6 @@
 # Arayüz Şablonu(weather.html)
 
-`weather.html`, bileşendeki signal’leri ekrana çevirir. Şablonda iş mantığı yazılmaz, veri ve tarih biçimlendirmesi [bileşen](bilesen-mantigi-weather.ts.md#gun-secimi-ve-saatlik-liste)den gelir. Dosyanın tamamı için GitHub’daki [`src/app/weather/weather.html`](https://github.com/AlimenurAkoz/weather-app/blob/main/weather-open-api/frontend/src/app/weather/weather.html) dosyasına bakabilirsiniz.
+`weather.html`, component'teki signal’leri ekrana çevirir. Şablonda iş mantığı yazılmaz, veri ve tarih biçimlendirmesi [component](component-bilesen-mantigi-weather.ts.md#gun-secimi-ve-saatlik-liste)'ten gelir. Dosyanın tamamı için GitHub’daki [`src/app/weather/weather.html`](https://github.com/AlimenurAkoz/weather-app/blob/main/weather-open-api/frontend/src/app/weather/weather.html) dosyasına bakabilirsiniz.
 
 ## Şablonun genel yapısı
 
@@ -8,7 +8,7 @@
 
 <table><thead><tr><th width="357.6000061035156">Bölüm</th><th>Ne zaman görünür</th><th>Bağlı signal</th></tr></thead><tbody><tr><td>Arama alanı ve öneri listesi</td><td>Her zaman</td><td><code>suggestions</code>, <code>showSuggestions</code></td></tr><tr><td>Hata mesajı ve “Bunu mu demek istediniz?” kutusu</td><td>Hata varsa</td><td><code>error</code>, <code>suggestions</code></td></tr><tr><td>Yükleniyor yazısı</td><td>İstek sürerken</td><td><code>loading</code></td></tr><tr><td>Güncel hava, haftalık ve saatlik tahmin</td><td>Veri geldiyse</td><td><code>weather</code>, <code>selectedDay</code></td></tr><tr><td>Veri kaynağı bağlantısı</td><td>Her zaman</td><td>-</td></tr></tbody></table>
 
-Koşullu bölümler Angular’ın `@if` ve `@for` blokları ile yazılır. Bu bloklar yerleşik olduğu için bileşenin `imports` listesine bir şey eklemek gerekmez, `weather.ts`’teki `imports: []` listesi boş kalır.
+Koşullu bölümler Angular’ın `@if` ve `@for` blokları ile yazılır. Bu bloklar yerleşik olduğu için component'in `imports` listesine bir şey eklemek gerekmez, `weather.ts`’teki `imports: []` listesi boş kalır.
 
 ### Arama alanı
 
@@ -30,7 +30,7 @@ Koşullu bölümler Angular’ın `@if` ve `@for` blokları ile yazılır. Bu bl
 ```
 
 * `#cityInput`, kutuya şablon içinde bir ad verir. Değer `cityInput.value` ile okunur, bu yüzden `FormsModule` veya `ngModel` kullanılmaz.
-* Kutuda her tuş vuruşunda `onInput` (yazarken öneri) ve "Enter" tuşunda ve "Ar&#x61;**"** düğmesinde de `search` çalışır.
+* Kutuda her tuş vuruşunda `onInput` çalışır. "Enter" tuşunda ve "Ara" düğmesinde ise `search` çalışır.
 * `autocomplete="off"`, tarayıcının kendi öneri listesinin bizimkinin üstüne binmesini önler.
 
 
@@ -104,7 +104,7 @@ Koşullu bölümler Angular’ın `@if` ve `@for` blokları ile yazılır. Bu bl
     2. Öneri listesinin dolu olması (`suggestions()`)
 
     Hata oluşmadığı sürece öneri listesi dolu olsa dahi kutu açılmaz.
-* Yazarken açılan liste ile bu kutu aynı `suggestions` signal’ini kullanır. Ayrım `showSuggestions` ile yapılır, `trySuggestion` bu signal’i `false` bırakır. Detay için [tıklayınız](bilesen-mantigi-weather.ts.md#bicimlendirme-metotlari).
+* Yazarken açılan liste ile bu kutu aynı `suggestions` signal’ini kullanır. Ayrım `showSuggestions` ile yapılır, `trySuggestion` bu signal’i `false` bırakır. Ayrıntı için Component Mantığı sayfasındaki [Şehir Önerileri](component-bilesen-mantigi-weather.ts.md#sehir-onerileri) başlığının içeriğine bakınız.
 * `role="alert"`, ekran okuyucuların hata mesajını hemen okumasını sağlar.
 
 
@@ -195,7 +195,7 @@ Koşullu bölümler Angular’ın `@if` ve `@for` blokları ile yazılır. Bu bl
 * `let i = $index`, `@for` içinde kartın sırasını verir. Bu sıra hem seçili gün kontrolünde hem `selectDay(i)` çağrısında kullanılır.
 * `[class.selected]="selectedDay() === i"` seçili karta `selected` sınıfını ekler. Sınıf yalnızca koşul doğruyken bulunur.
 * Kart bir `<button>`’dır. Böylece klavye ile de seçim yapılabilir.
-* Tarih ve durum metni için bileşendeki `formatDay` ve `getWeatherDescription` çağrılır. Gün doğumu ve batımı `formatShortHour` ile gösterilir.
+* Tarih ve durum metni için component'teki `formatDay` ve `getWeatherDescription` çağrılır. Gün doğumu ve batımı `formatShortHour` ile gösterilir.
 
 ### Saatlik tahmin kartları
 

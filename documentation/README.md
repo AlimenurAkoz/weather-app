@@ -13,7 +13,7 @@ Kullanıcı arama çubuğuna bir şehir adı yazdığında şunları görür:
 
 Ek olarak:
 
-* **Şehir önerileri:** Yazım sırasında eşleşen şehirler listelenir (örneğin "ankar" yazınca Ankara, Ankaran vb.).
+* **Şehir önerileri:** Yazım sırasında eşleşen şehirler listelenir (örneğin "ankar" yazınca Ankara, Akara vb.).
 * **Otomatik başlangıç:** Sayfa ilk açıldığında boş ekran görünmemesi için "Sivas" için arama otomatik yapılır.
 
 <figure><img src=".gitbook/assets/start.png" alt="" width="563"><figcaption></figcaption></figure>
@@ -38,8 +38,8 @@ Open-Meteo'nun hava durumu servisi (Forecast API) şehir adı kabul etmez, **enl
 
 ### Veri akışı
 
-1. **Kullanıcı girişi:** Kullanıcı arama kutusuna bir şehir adı yazar ve arama tetiklenir. Değer `weather.ts` bileşenine iletilir.
-2. **Servis çağrısı:** Bileşen, `weather-api.ts` içindeki `WeatherApi` servisini çağırır. Servis iki isteği zincirleyip sonucu bir `Observable` olarak döndürür. Bileşen bunu `subscribe` eder; `subscribe` edilmeden istek gönderilmez.
+1. **Kullanıcı girişi:** Kullanıcı arama kutusuna bir şehir adı yazar ve arama tetiklenir. Değer `weather.ts` component’ine(bileşenine) iletilir.
+2. **Servis çağrısı:** Component, `weather-api.ts` içindeki `WeatherApi` servisini çağırır. Servis iki isteği zincirleyip sonucu bir `Observable` olarak döndürür. Component bunu `subscribe` eder; `subscribe` edilmeden istek gönderilmez.
 3. **Koordinat çözümleme:** Servis önce Geocoding API'ye istek atarak şehrin enlem ve boylam bilgisini alır.
 4. **İstek zincirleme (`switchMap`):** Koordinatlar gelince `switchMap` operatörü, bu değerlerle Forecast API isteğini başlatır.
 5. **Veri süzme (`map`):** Forecast API'den gelen karmaşık JSON, `map` operatörüyle sadeleştirilir; yalnızca gerekli alanlar (sıcaklık, nem, saatlik ve günlük tahmin vb.) alınır. Sayısal hava kodları da `WEATHER_CODES` ile Türkçe metne çevrilir.
@@ -49,7 +49,7 @@ Open-Meteo'nun hava durumu servisi (Forecast API) şehir adı kabul etmez, **enl
 
 ## 🛠️ Kullanılan Teknolojiler ve İşlevleri
 
-<table data-search="false"><thead><tr><th>Teknoloji / Araç</th><th>Mimari İçindeki İşlevi ve Kullanım Amacı</th></tr></thead><tbody><tr><td><strong>Angular (v21)</strong></td><td>Arayüzü bileşenler (component) halinde geliştirmek için kullanılan TypeScript tabanlı framework. Her bileşen mantık (<code>.ts</code>), görünüm (<code>.html</code>) ve stil (<code>.css</code>) dosyalarından oluşur.</td></tr><tr><td><strong>TypeScript</strong></td><td>Veri tiplerini kodda tanımlayarak hataları çalıştırmadan önce yakalamayı sağlar.</td></tr><tr><td><strong>Signals</strong></td><td>Bir değer <code>.set()</code> ile değiştiğinde, ona bağlı ekran parçasının otomatik güncellenmesini sağlar. API'den gelen hava durumu verisi signal'de tutulur.</td></tr><tr><td><strong>HttpClient</strong></td><td>Angular'ın dış servislere HTTP isteği atma aracıdır. Geocoding ve Forecast isteklerini bu araç gönderir.</td></tr><tr><td><strong>RxJS</strong> (<code>switchMap</code>, <code>map</code>, <code>throwError</code>)</td><td>Asenkron veri akışlarını yönetir. <code>switchMap</code>: koordinattan hava durumuna geçişi zincirler. <code>map</code>: gelen karmaşık JSON'dan sadece gerekli alanları (sıcaklık, nem vb.) süzer. <code>throwError</code>: hatayı kontrollü şekilde arayüze iletir.</td></tr><tr><td><strong>Open-Meteo API</strong></td><td>Ücretsiz, üyelik veya API anahtarı gerektirmeyen açık kaynaklı servis. Geocoding (şehir → koordinat) ve Forecast (hava durumu) verilerini sağlar.</td></tr><tr><td><strong>Node.js / npm</strong></td><td>Angular CLI ve derleme araçlarının çalıştığı JavaScript çalışma ortamıdır. npm ile Angular, RxJS gibi paketler indirilir. Yalnızca geliştirme aşamasında kullanılır, uygulama tarayıcıda çalışır.</td></tr><tr><td><strong>Angular CLI</strong></td><td>Projeyi oluşturma (<code>ng new</code>), çalıştırma (<code>ng serve</code>), test etme (<code>ng test</code>) ve derleme (<code>ng build</code>) için kullanılan komut satırı aracı.</td></tr><tr><td><strong>Git &#x26; GitHub</strong></td><td>Kod versiyon kontrolü ve depolama. Doküman GitBook ile senkronize edilir.</td></tr></tbody></table>
+<table data-search="false"><thead><tr><th>Teknoloji / Araç</th><th>Mimari İçindeki İşlevi ve Kullanım Amacı</th></tr></thead><tbody><tr><td><strong>Angular (v21)</strong></td><td>Arayüzü component'ler halinde geliştirmek için kullanılan TypeScript tabanlı framework. Her component mantık (<code>.ts</code>), görünüm (<code>.html</code>) ve stil (<code>.css</code>) dosyalarından oluşur.</td></tr><tr><td><strong>TypeScript</strong></td><td>Veri tiplerini kodda tanımlayarak hataları çalıştırmadan önce yakalamayı sağlar.</td></tr><tr><td><strong>Signals</strong></td><td>Bir değer <code>.set()</code> ile değiştiğinde, ona bağlı ekran parçasının otomatik güncellenmesini sağlar. API'den gelen hava durumu verisi signal'de tutulur.</td></tr><tr><td><strong>HttpClient</strong></td><td>Angular'ın dış servislere HTTP isteği atma aracıdır. Geocoding ve Forecast isteklerini bu araç gönderir.</td></tr><tr><td><strong>RxJS</strong> (<code>switchMap</code>, <code>map</code>, <code>throwError</code>)</td><td>Asenkron veri akışlarını yönetir. <code>switchMap</code>: koordinattan hava durumuna geçişi zincirler. <code>map</code>: gelen karmaşık JSON'dan sadece gerekli alanları (sıcaklık, nem vb.) süzer. <code>throwError</code>: hatayı kontrollü şekilde arayüze iletir.</td></tr><tr><td><strong>Open-Meteo API</strong></td><td>Ücretsiz, üyelik veya API anahtarı gerektirmeyen açık kaynaklı servis. Geocoding (şehir → koordinat) ve Forecast (hava durumu) verilerini sağlar.</td></tr><tr><td><strong>Node.js / npm</strong></td><td>Angular CLI ve derleme araçlarının çalıştığı JavaScript çalışma ortamıdır. npm ile Angular, RxJS gibi paketler indirilir. Yalnızca geliştirme aşamasında kullanılır, uygulama tarayıcıda çalışır.</td></tr><tr><td><strong>Angular CLI</strong></td><td>Projeyi oluşturma (<code>ng new</code>), çalıştırma (<code>ng serve</code>), test etme (<code>ng test</code>) ve derleme (<code>ng build</code>) için kullanılan komut satırı aracı.</td></tr><tr><td><strong>Git &#x26; GitHub</strong></td><td>Kod versiyon kontrolü ve depolama. Doküman GitBook ile senkronize edilir.</td></tr></tbody></table>
 
 ## ⚙️ Projeyi Oluşturma (Sıfırdan)
 
@@ -70,7 +70,7 @@ ng version
 ### **3. Projeyi oluştur**
 
 ```bash
-mkdir new weather-open-api
+mkdir weather-open-api
 cd weather-open-api
 ng new frontend
 cd frontend
@@ -84,7 +84,7 @@ cd frontend
 Soruların sırası ve adı CLI sürümüne göre değişebilir.&#x20;
 {% endhint %}
 
-### **4. Bileşen ve servisi oluştur**
+### **4. Component(Bileşen) ve servisi oluştur**
 
 ```bash
 ng generate component weather
@@ -95,7 +95,7 @@ Bu komutlar `weather.ts`, `weather.html`, `weather.css`, `weather.spec.ts` ve `w
 
 ### **5. HttpClient'ı etkinleştir**
 
-`src/app/app.config.ts` dosyasındaki `providers` listesine `provideHttpClient()` eklenir. Bu olmadan `HttpClient` ile istek atılamaz.
+`src/app/app.config.ts` dosyasındaki `providers` listesine `provideHttpClient()` eklenir. Bu satır `HttpClient`’ı uygulamaya açıkça kaydeder. Bu projede (Angular v21) satır olmadan da istekler çalıştı, ancak açık bırakmak hangi araçla istek atıldığını gösterir ve ileride interceptor gibi ayarlar eklemek için başlangıç noktasıdır.
 
 ```typescript
 export const appConfig: ApplicationConfig = {
@@ -138,6 +138,10 @@ ng test
 ```bash
 npm test
 ```
+
+Testler izleme modunda açılır. Beklenen sonuç:
+
+<div align="left"><figure><img src=".gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure></div>
 
 #### Uygulamayı derlemek için:
 

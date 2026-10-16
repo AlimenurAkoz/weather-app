@@ -2,13 +2,13 @@
 
 `weather-api.ts` uygulamanın dış dünyayla konuşan tek dosyasıdır. Bu sayfada önce servisin kullandığı veri tiplerini, sonra Open-Meteo’ya iki aşamalı isteği nasıl attığı anlatılıyor. Dosyanın tamamı için GitHub'da [**`weather-app`**](https://github.com/AlimenurAkoz/weather-app) reposundaki [`src/app/weather-api.ts`](https://github.com/AlimenurAkoz/weather-app/blob/main/weather-open-api/frontend/src/app/weather-api.ts) dosyasına bakabilirsiniz.
 
-Weather App sayfasındaki servisi oluşturma aşamasını incelemek için [buraya tıklayabilirsiniz.](./#id-4.-bilesen-ve-servisi-olustur)
+Weather App sayfasındaki servisi oluşturma aşamasını incelemek için [buraya tıklayabilirsiniz.](./#id-4.-component-bilesen-ve-servisi-olustur)
 
 ## Veri Modelleri
 
-Dosyada dört interface vardır. `WeatherData` ve `CitySuggestion` dışa açılır (`export`), çünkü bileşen (`weather.ts`) bunları import eder. `GeocodingResponse` ve `ForecastResponse` ise Open-Meteo cevaplarının ham halini tanımlar ve yalnızca bu dosyada kullanılır. Alan adları [Open-Meteo ](open-meteo.md)sayfasındaki JSON ile aynıdır.
+Dosyada dört interface vardır. `WeatherData` ve `CitySuggestion` dışa açılır (`export`), çünkü component (`weather.ts`) bunları import eder. `GeocodingResponse` ve `ForecastResponse` ise Open-Meteo cevaplarının ham halini tanımlar ve yalnızca bu dosyada kullanılır. Alan adları [Open-Meteo ](open-meteo.md)sayfasındaki JSON ile aynıdır.
 
-Bileşenin kullandığı tip `WeatherData`'dır:
+Component'in kullandığı tip `WeatherData`'dır:
 
 ```ts
 export interface WeatherData {
@@ -40,7 +40,7 @@ export interface WeatherData {
 ```
 
 {% hint style="info" %}
-Ham cevapta `hourly` ve `daily` alanları paralel dizilerdir. Burada her saat ve gün için tek bir nesne bulunur. Alan adları da API’dekinden farklıdır (`temperature_2m_max` yerine `temperatureMax`), böylece bileşen ve şablon API’nin adlandırmasından bağımsız kalır.&#x20;
+Ham cevapta `hourly` ve `daily` alanları paralel dizilerdir. Burada her saat ve gün için tek bir nesne bulunur. Alan adları da API’dekinden farklıdır (`temperature_2m_max` yerine `temperatureMax`), böylece component ve şablon(template) API’nin adlandırmasından bağımsız kalır.&#x20;
 {% endhint %}
 
 Şehir önerileri için ayrı bir tip vardır:
@@ -57,7 +57,7 @@ export interface CitySuggestion {
 ```
 
 {% hint style="info" %}
-`admin1?`'deki `?` bu alanın isteğe bağlı olduğunu gösterir. Geocoding cevabında bölge adı her sonuçta bulunmayabilir.
+`admin1?` alanındaki `?` bu alanın isteğe bağlı olduğunu gösterir. Geocoding cevabında bölge adı her sonuçta bulunmayabilir.
 {% endhint %}
 
 ## Servis İskeleti
@@ -76,12 +76,12 @@ export class WeatherApi {
 }
 ```
 
-* `providedIn: 'root'` servisin uygulama genelinde tek bir örnek olarak oluşturulmasını sağlar. Bileşen onu `inject(WeatherApi)` ile alır.
-* `inject(HttpClient)` çalışsın diye `app.config.ts` içine `provideHttpClient()` eklenmişti.
+* `providedIn: 'root'` servisin uygulama genelinde tek bir örnek olarak oluşturulmasını sağlar. Component onu `inject(WeatherApi)` ile alır.
+* `HttpClient`, `app.config.ts` içine eklenen `provideHttpClient()` ile kaydedilmiştir.
 
 ### `getWeather`: iki aşamalı istek
 
-`getWeather(city)` metodu şehir adını alır ve `Observable<WeatherData>` döndürür. Bileşen `subscribe` edene kadar istek gönderilmez.
+`getWeather(city)` metodu şehir adını alır ve `Observable<WeatherData>` döndürür. Component `subscribe` edene kadar istek gönderilmez.
 
 #### **1. Geocoding isteği**
 
@@ -134,7 +134,7 @@ Forecast isteği Geocoding’in sonucuna (koordinatlara) bağlı olduğu için `
 `geo.results?.[0]` ifadesindeki `?.`, `results` alanı yoksa hata vermeden `undefined` döndürür. Şehir bulunamadığında API’de bu alan hiç gelmez.
 {% endhint %}
 
-### **`map` ile veri süzme:**
+### **`map` ile veri süzme**
 
 Forecast cevabı gelince `map` onu `WeatherData`’ya çevirir.
 
@@ -194,7 +194,7 @@ const WEATHER_CODES: Record<number, string> = {
 };
 ```
 
-**Bileşen, saatlik ve günlük kartlardaki durum metni için serviste çağırılan metot:**
+**Component, durum metni için servisteki şu metodu çağırır:**
 
 ```ts
 getWeatherDescription(weatherCode: number): string {
@@ -214,7 +214,7 @@ if (!place) {
 }
 ```
 
-Hata bileşendeki `subscribe`’ın `error` kısmında yakalanır ve uygulama çökmeden kullanıcıya mesaj gösterilir. Ağ hatalarını `HttpClient` kendisi fırlatır, kodda ayrıca bir işlem yoktur.
+Hata component'teki `subscribe`’ın `error` kısmında yakalanır ve uygulama çökmeden kullanıcıya mesaj gösterilir.
 
 {% hint style="info" %}
 Hata iki durumda oluşur: Geocoding sonuç vermezse (yukarıdaki kontrol) veya istek ağ hatasıyla başarısız olursa. İkinci durumda `HttpClient` hatayı kendisi fırlatır, kodda ayrıca bir işlem yoktur.
@@ -222,7 +222,7 @@ Hata iki durumda oluşur: Geocoding sonuç vermezse (yukarıdaki kontrol) veya i
 
 ### `getSuggestions`: şehir önerisi
 
-Aynı Geocoding servisi öneri listesi için de kullanılır. Bu kez sonuç sayısı 3'dir ve cevap `CitySuggestion` listesine çevrilir:
+Aynı Geocoding servisi öneri listesi için de kullanılır. Bu kez sonuç sayısı 3'tür ve cevap `CitySuggestion` listesine çevrilir:
 
 ```ts
 getSuggestions(city: string): Observable<CitySuggestion[]> {
@@ -252,7 +252,11 @@ getSuggestions(city: string): Observable<CitySuggestion[]> {
 }
 ```
 
-İki harften kısa metinde istek atılmaz. Sonuç bulunamazsa hata fırlatılmaz, boş liste döner, çünkü öneri bulunmaması bir hata değildir. Metot bileşende iki yerde kullanılır: yazarken açılan liste ve “Bunu mu demek istediniz?” kutusu.
+İki harften kısa metinde istek atılmaz. Sonuç bulunamazsa hata fırlatılmaz, boş liste döner, çünkü öneri bulunmaması bir hata değildir. Metot component'te iki yerde kullanılır: yazarken açılan liste ve “Bunu mu demek istediniz?” kutusu.
+
+{% hint style="info" %}
+Sonuç sayısı 3 seçildi çünkü Open-Meteo bulanık eşleşme yaptığı için daha yüksek sayılarda alakasız yerler de listeye girer.
+{% endhint %}
 
 #### Beklenen sonuç
 
