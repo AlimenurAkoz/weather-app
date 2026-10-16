@@ -125,7 +125,7 @@ export class WeatherApi {
       .get<GeocodingResponse>(this.geocodingUrl, {
         params: {
           name: value,
-          count: 8,
+          count: 3,
           language: 'tr',
         },
       })
