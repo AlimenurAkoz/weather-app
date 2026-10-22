@@ -69,3 +69,16 @@ site:
           default: true
           content:
             directory: ./help-center
+    - type: section
+      key: section-6
+      title: Untitled
+      path: untitled
+      children:
+        - type: space
+          key: space-6
+          title: Untitled
+          path: untitled
+          default: true
+          draft: true
+          content:
+            directory: ./untitled
