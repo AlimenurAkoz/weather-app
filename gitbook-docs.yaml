@@ -71,12 +71,13 @@ site:
             directory: ./help-center
     - type: section
       key: section-6
-      title: Untitled
+      title: Shopping List App
       path: untitled
+      description: ""
       children:
         - type: space
           key: space-6
-          title: Untitled
+          title: Shopping List App
           path: untitled
           default: true
           draft: true
